@@ -8,6 +8,7 @@ import com.example.batch.batch.process.filter.EmployeeNameFilterItemProcessor;
 import com.example.batch.batch.process.validating.UserValidator;
 import com.example.batch.batch.repository.ProfileRepository;
 import com.example.batch.batch.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -31,18 +32,19 @@ import java.util.*;
 
 @Configuration
 @EnableBatchProcessing
+@AllArgsConstructor
 public class BatchConfiguration {
 
-    @Autowired
+
     public JobBuilderFactory jobBuilderFactory;
-    @Autowired
+
     public StepBuilderFactory stepBuilderFactory;
 
-    @Autowired
+
     @Lazy
     private UserRepository userRepository;
 
-    @Autowired
+
     @Lazy
     private ProfileRepository profileRepository;
 
