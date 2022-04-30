@@ -1,26 +1,20 @@
 version: "3"
-
-
 services:
-  batchmysql-database:
+  mysql-standalone:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: myfirstdb
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=myfirstdb
     ports:
-      - 3036:3036
+      - 3306:3306
 
-  java-batch:
-    image: pavanbhagathi1234/javabatch:latest
+  docker-springboot-batch:
+    image: pavanbhagathi1234/javabatch:v1
     ports:
-      - 8000:8000
-    networks:
-      - batch-network
+      - 8086:8086
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
-      - batch-batchmysql-database-1
-
-
-networks:
-  batch-network:
-
-
+      - mysql-standalone
